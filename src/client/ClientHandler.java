@@ -37,7 +37,7 @@ public class ClientHandler implements Runnable {
 
                      checkBoxes[i-1] = Integer.parseInt(list[i]);
                     }
-                 dataTransfer.setCheckBoxes(checkBoxes);
+                 dataTransfer.setArray(checkBoxes);
 
                 } else {
                     dataTransfer.sendToGui(msg);

@@ -3,6 +3,7 @@ package client;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Vector;
 
 public class DataTransfer {
 
@@ -12,13 +13,25 @@ public class DataTransfer {
     private String username;
     private List<JCheckBox> boxes;
 
+    private JList<String> messages;
 
-    public DataTransfer(JTextField textField, JTextArea area, JButton button,String username, List<JCheckBox> boxes) {
+    private Vector<String> messageData;
+
+    private int []array;
+
+
+    public DataTransfer(JTextField textField, JTextArea area, JButton button,String username
+            , List<JCheckBox> boxes,JList<String> messages
+            , Vector<String> messageData) {
         this.textField = textField;
         this.area = area;
         this.button = button;
         this.username = username;
         this.boxes = boxes;
+        this.messages = messages;
+        this.messageData = messageData;
+        messages.addListSelectionListener(e -> setCheckBoxes());
+
     }
 
     public String boxesToString(){
@@ -30,6 +43,10 @@ public class DataTransfer {
             }
         }
         return boxString.toString();
+    }
+
+    public void setArray(int []array){
+        this.array = array;
     }
 
     public void setAction(ActionListener listener){
@@ -48,14 +65,17 @@ public class DataTransfer {
     }
 
     public void sendToGui(String msg){
-        area.setText(area.getText()+msg + "\n");
+
+
+        messageData.add(msg);
+        messages.updateUI();
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setCheckBoxes(int []array){
+    public void setCheckBoxes(){
         boxes.forEach(e -> e.setSelected(false));
         for(Integer el : array){
             boxes.get(el).setSelected(true);

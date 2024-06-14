@@ -15,7 +15,7 @@ public class Launcher {
         EastPanelMessage panelMessage = buildGui.getEastPanelMessage();
         DataTransfer dataTransfer = new DataTransfer(panelMessage.getTextField()
                 ,panelMessage.getTextArea(),panelMessage.getSend()
-                ,userName,buildGui.getCentralPanelBoxes());
+                ,userName,buildGui.getCentralPanelBoxes(),panelMessage.getMessages(),panelMessage.getMessageData());
 
         Client client = new Client(dataTransfer);
 
